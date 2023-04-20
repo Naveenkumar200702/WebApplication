@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login</title>
+</head>
+<link rel="stylesheet" href="./Home/Login.css">
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css"
+	type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body onload="findSession()" onunload="deleteSession()">
+	<!--   HEADING AND NAVIGATION BAR -->
+	<div id="header">
+		<img src="./Images/logo3.png" alt="logo" id="logo">
+		<h1 id="heading">Knowledge Guidance</h1>
+		<div id="showLoginUser"></div>
+	</div>
+	<div id="navigationbar">
+		<header>
+			<nav>
+				<a id="home-content">Home</a> 
+				<a id="about-content">About</a> 
+				<a id="show-courses">Course</a> 
+				<a id="Assignment">Assignment</a>
+				<a id="student-login">Login</a> 
+				<a id="student-signup">Sign up</a> 
+				
+				<div class="dropdown" id="dropdownProfile">
+    			<button class="dropbtn">Profile 
+      			<i class="fa fa-caret-down"></i>
+    			</button> 
+    			<div class="dropdown-content">
+      			<a id="myProfile">MyProfile</a>
+      			<a id="myCourse" onclick="getMyCourse()">MyCourse</a>
+    			</div>
+  				</div> 
+  				 
+  				 
+				<a id="LogOut" onclick="deleteSession()">Log Out</a>
+			</nav>
+		</header>
+	</div>
+	<!--  ------------------------------------------------------------------- -->
+	<!--  ---------------LOGIN IN POPUP-------------------------------- -->
+	<div class="loginPopup">
+		<div id="loginForm">
+			<div id="chooseUser">
+				<div id="studentLogin" onclick="getStudentOption();checkOption()">student</div>
+				<div id="staffLogin" onclick="getStaffOption();checkOption()">staff</div>
+			</div>
+			<br> <span id="erOption" class="error"></span>  <label
+				class="loginLabel" for="username">E-mail:</label><br>
+			<br> <input type="text" id="loginusername" name="username"
+				oninput="checkUsername()" placeholder="someone@gmail.com" required>
+			<br> <span id="erUsername" class="error"></span><br> <label
+				class="loginLabel" for="password">Password:</label><br>
+			<br> <input type="password" id="loginpassword" name="password"
+				oninput=" checkPassword()" placeholder="Password" required>
+			<br> <span id="erPassword" class="error"></span> <br> <br><input
+				type="button" id="loginSubmit" onclick="login()" value="Login">
+			<h4>Don't have an Account?</h4>
+			<a href="#" id="signUpLink">click here to signup..</a>
+		</div>
+		<a class="close" onclick="loginClosePopup()">Close</a>
+	</div>
+	<!--  ----------------------------------------------------------------------- -->
+	<!--  ------------------------------------SIGN UP---------------------------- -->
+	<div class="signupPopup">
+		<form id="signupForm">
+			<div id="signupUser">
+				<div id="studentSignUp" onclick="getStudentSignup()">student</div>
+				<div id="staffSignUp" onclick="getStaffSignup()">staff</div>
+			</div>
+			<span id="erChooseOption" class="error"></span> <br>
+			<!-- student signup -->
+			<div id="studentPopUp">
+				<label class="studentLabel">Mail Id :</label> <br> 
+				<input class="studentInput" type="email" id="mail"
+					placeholder="sample12@gmail.com" required></input> 
+					<span class="error" id="erEmail"></span> <br> 
+					<label class="studentLabel">Password :</label> <br> 
+					<input class="studentInput" type="password" id="password" oninput="checkPassword()"
+					placeholder="Enter the Password" oninput="checkPassword()" required />
+					<br> <span id="erSignupPassword" class="error"></span> <br> 
+					<label class="studentLabel">Name :</label> <br> 
+					<input class="studentInput" type="text" id="name"
+					placeholder="Enter the  Name" required> 
+					<span id="erName" class="error"></span>
+					<br> <label class="studentLabel">Date-Of-Birth :</label> <br>
+					<input class="studentInput" type="date" id="dob" max="2008-12-31" min="1940-01-01" required> 
+					<span id="erDate" class="error"></span> <br> 
+					<label class="studentLabel">Phone_no :</label> <br> 
+					<input class="studentInput" type="number" id="phoneno"
+					placeholder="Enter the Mobile Number" required></input> 
+					<span class="error" id="erPhone"></span> <br> 
+					<label class="studentLabel">Highest qualification :</label> <br> 
+					<input class="studentInput" type="text" id="qualification" placeholder="Enter the Qualification" required></input>
+					<span id="erQualification" class="error"></span> <br>
+					<div id="experienceShow">
+						<label class="studentLabel">Experience :</label> <br> <input
+							class="studentInput" type="number" id="experience"
+							placeholder="Enter Experience" required /> <br> 
+							<span class="error" id="erExperience"></span> <br>
+					</div>
+				<button type="submit" class="studentSubmitSignup"
+					onclick="addStudent()">Submit</button>
+			</div>
+
+		</form>
+		<a href="#" class="signupClose" onclick="closePopup()">Close</a>
+	</div>
+	<!--  ------------------------------------------------------------------------------------------------- -->
+	<!-- -----------------------------------------HOME ---------------------------------------------------  -->
+	<div id="home">
+		<div id="imagehover"></div>
+		<div id="content1">
+			<div id="content1Left"></div>
+			<div id="content1Right">
+				<h1>Learn without limits</h1>
+				<p>Start, switch, or advance your career with more than 5,400
+					courses, Professional Corses, and degrees from world-class
+					universities and companies.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- ----------------------------------------------ABOUT ----------------------------------------  -->
+	<div id="about">
+		<div class="aboutContent">
+			<div class="moreInfo">
+				<h1>More Info</h1>
+				<p>Knowledge Graduation offers a unique and highly engaging way
+					to learn vital concepts. Wherever you are in your career or the
+					world we provide educational experiences that can help you achieve
+					your personal and professional goals.</p>
+			</div>
+
+			<h2 class="aboutheading">HOW IT WORKS</h2>
+			<div id=row1 class="howItWorks">
+				<div class="learningExperience" id="info">
+					<img src="./Images/experience.png" alt="experience"
+						class="miniLogo">
+					<h3>Learning Experience</h3>
+					<p>Our programs are designed to bring the Harvard Business
+						School classroom to you. Find out how.</p>
+				</div>
+				<div class="certificate" id="info">
+					<img src="./Images/certificate.png" alt="MiniCertificate"
+						class="miniLogo">
+					<h3>Certificates, Credentials & Credits</h3>
+					<p>We offer multiple ways to learn vital business concepts.
+						Discover which option is best for you.</p>
+				</div>
+				<div class="learningTrack" id="info">
+					<img src="./Images/learningtrack.png" alt="learningtrack"
+						class="miniLogo">
+					<h3>Learning Tracks</h3>
+					<p>Gain deeper insights and expertise with this advanced
+						concept.</p>
+				</div>
+			</div>
+			<h2 class="aboutheading">NEED HELP</h2>
+			<div id=row1 class="needHelp">
+				<div class="requestMore" id="info">
+					<img src="./Images/requestforinformation.png" alt="requestMore"
+						class="miniLogo">
+					<h3>Request More Information</h3>
+					<p>Learn more about specific programs, or sign up for news and
+						updates from Knowledge Graduation</p>
+				</div>
+				<div class="policies" id="info">
+					<img src="./Images/policy.png" alt="Policy" class="miniLogo">
+					<h3>Policies</h3>
+					<p>Get details on academics, accommodations, changing your
+						program status, and more.</p>
+				</div>
+				<div class="studentStories" id="info">
+					<img src="./Images/studentstories.png" alt="studentStories"
+						class="miniLogo">
+					<h3>Student Stories</h3>
+					<p>Participants share their firsthand experiences with
+						Knowledge Graduation</p>
+				</div>
+			</div>
+			<br>
+			<br>
+			<hr>
+			<div id="mediaIcon">
+				<div>
+					<a href="https://www.facebook.com/login/"><img
+						src="./Images/facebook.png" alt="facebook" class="mediaLogo"></a>
+				</div>
+
+
+				<div>
+					<a href="https://www.instagram.com/"> <img
+						src="./Images/instagram.png" alt="instagram" class="mediaLogo"></a>
+				</div>
+
+				<div>
+					<a href="https://twitter.com/"> <img src="./Images/twiter.png"
+						alt="twiter" class="mediaLogo">
+					</a>
+				</div>
+				<div>
+					<a href="https://www.linkedin.com/login"> <img
+						src="./Images/linkedin.png" alt="linkedin" class="mediaLogo"></a>
+				</div>
+				<div>
+					<a href="https://www.whatsapp.com/"> <img
+						src="./Images/whatsapp.png" alt="whatsapp" class="mediaLogo"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!--  ====================== POST ASSIGNMENT	 ================================= -->
+<div id="PostAssignment"></div>
+
+<!-- --------------------------------- SHOW COURSES ------------------------------------------------- -->
+<div id="containers"></div>
+
+<div id="view-course">
+	<a id="backButton" onclick="goBack()">close</a>
+	<div id="showCourse-details">
+	</div>
+<!--  ================================ QUIZ QUESTIONS ======================================= -->
+	<div id="quizQuestion">
+	<div id="Question"></div>
+	<div id="Options"></div>
+
+	<button type="button" class="next" id="nextQuestion" onclick="handleClickNext()">Next</button>
+	<button type="submit" class ="quiz-submit" onclick="submitQuiz()" id="nextSubmit"> Submit </button>
+	</div>
+</div>
+<!-- ============================================================================================== -->
+<!-- ------------------------------------MYPROFILE---------------------------------------------------- -->
+<div id="showMyProfile">
+</div>
+<!-- =========================================================================================== -->
+</body>
+<script src="Home/Login.js"></script>
+<script src="https://jsuites.net/v4/jsuites.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+</html>

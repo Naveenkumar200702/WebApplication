@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Login</title>
+<link rel="stylesheet" href="./Admin.html">
+</head>
+
+
+<body id="quizBody">
+
+<button id="adminLogin" > Admin</button>
+
+<div id="LoginWindow">
+	<label>UserName : </label><input type="text" id="loginpassword" oninput="checkUsername()"/><br>
+	<span id="erUsername"></span><br>
+	<label>Password : </label><input type="password" id="loginusername" oninput="checkPassword()"/><br>
+	<span id="erPassword"></span>
+	<br>
+	<button id="submit" onclick="login()">Login</button>
+</div>
+</body>
+<script src="./Admin.js"></script>
+</html>
