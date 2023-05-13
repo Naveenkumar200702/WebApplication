@@ -5,10 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
+
 import dbcon.Connect;
 
 public class LoginCheck {
+	private String pName = "";
+
+	public String getpName() {
+		return pName;
+	}
 
 	public int loginCheck(JSONObject values) {
 		String option = (String) values.get("option");
@@ -54,6 +60,7 @@ public class LoginCheck {
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
+				this.pName = (String) rs.getString("student_name");
 				return 2;
 			}
 
@@ -69,22 +76,24 @@ public class LoginCheck {
 		String SELECT_QUERY1 = "SELECT * FROM staff_temp WHERE email_id=? && s_password=?";
 		PreparedStatement ps;
 		try {
-			PreparedStatement prepareSt=con.prepareStatement(SELECT_QUERY1);
+			PreparedStatement prepareSt = con.prepareStatement(SELECT_QUERY1);
 			prepareSt.setString(1, username);
 			prepareSt.setString(2, password);
-			ResultSet rs1=prepareSt.executeQuery();
-			if(rs1.next())
+			ResultSet rs1 = prepareSt.executeQuery();
+			if (rs1.next())
 				return 4;
 			ps = con.prepareStatement(SELECT_QUERY);
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next())
+			if (rs.next()) {
+				this.pName = (String) rs.getString("staff_name");
 				return 3;
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return -1;
 	}
-
 }

@@ -1,5 +1,5 @@
 // ------------------------SESSION HANDLING---------------------------
-
+var pName;
 
 function findSession() {
 	var httpreq = new XMLHttpRequest();
@@ -11,13 +11,12 @@ function findSession() {
 					hideLogIn(userName['name']);
 				else
 					hideStaffLogIn(userName['name'])
-
+				pName = userName['pName'];
 			}
 		}
 	}
 	httpreq.open("GET", "http://localhost:8080/Course_Management/FindSession");
 	httpreq.send();
-
 }
 
 function deleteSession() {
@@ -54,6 +53,7 @@ function getStudentOption() {
 	document.getElementById("staffLogin").style.backgroundColor = "grey";
 	document.getElementById("studentLogin").style.backgroundColor = "green";
 }
+
 function loginClosePopup() {
 	popup.classList.remove('student');//study
 	document.getElementById("studentLogin").style.backgroundColor = "grey";
@@ -72,24 +72,24 @@ function checkUsername() {
 		document.getElementById("erUsername").style.display = "none";
 	}
 }
+
 function checkPassword() {
 	let password = document.getElementById("loginpassword").value;
 	if (password.length > 0) {
 		document.getElementById("erPassword").style.display = "none";
 	}
 }
+
 function checkOption() {
 	if (option.length > 0) {
 		document.getElementById("erOption").style.display = "none";
 	}
-
 }
 
 function login() {
 	let password = document.getElementById("loginpassword").value;
 	let userName = document.getElementById("loginusername").value;
 	userName = userName.trim();
-	console.log(userName + "  " + password);
 	var flag = 0;
 	if (this.option.length == 0) {
 		document.getElementById("erOption").style.display = "block";
@@ -128,31 +128,35 @@ function login() {
 			swal("Your Account is waiting for Verification");
 			document.querySelector(".loginPopup").style.display = "none";
 		}
-		else {// invalid credentials			
+		else {// invalid credentials	
+			alert("Invalid Credentials");
 			swal("Error", "Invalid User!", "error");
-
 			document.querySelector(".loginPopup").style.display = "none";
 		}
-		//location.reload();
+
+		location.reload();
 	});
 }
 function hideStaffLogIn(userName) {
 	document.getElementById("show-courses").style.display = "none";
 	document.getElementById("student-login").style.display = "none";
 	document.getElementById("student-signup").style.display = "none";
+	document.getElementById("dropdownProfile").style.display = "none";
 
 	// =============================================================================================
+	document.getElementById("staffProfile").style.display = "block";
 	document.getElementById("Assignment").style.display = "block";
-	document.getElementById("dropdownProfile").style.display = "block";
 	document.getElementById("LogOut").style.display = "block";
 	document.getElementById("showLoginUser").innerHTML = userName;
 }
 
 function hideLogIn(userName) {
+	document.getElementById("staffProfile").style.display = "none";
 	document.getElementById("student-login").style.display = "none";
 	document.getElementById("student-signup").style.display = "none";
 	document.getElementById("dropdownProfile").style.display = "block";
 	document.getElementById("LogOut").style.display = "block";
+	document.getElementById("dropdownProfile").style.display = "block";
 	document.getElementById("showLoginUser").innerHTML = userName;
 }
 //ajax call for login 
@@ -490,14 +494,35 @@ document.getElementById("about-content").addEventListener('click', function() {
 	document.getElementById("home").style.display = "none";
 	document.getElementById("about").style.display = "block";
 	document.getElementById("showMyProfile").style.display = "none";
-	document.getElementById("PostAssignment").style.display="none";
-	
+	document.getElementById("PostAssignment").style.display = "none";
+
 });
 /* -----------------------------------------------------------------------------------*/
 /* ==================================HOME =========================================== */
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 3000); 
+}
+
+
 document.getElementById("home-content").addEventListener('click', function() {
 	document.getElementById("showMyProfile").style.display = "none";
-	document.getElementById("PostAssignment").style.display="none";
+	document.getElementById("PostAssignment").style.display = "none";
 	document.getElementById("containers").style.display = "none";
 	document.getElementById("about").style.display = "none";
 	show();
@@ -514,6 +539,7 @@ var show = function() {
 /* ====================================SHOW COURSES=========================================*/
 
 var allCourseDetails;
+var certificateCourseId;
 document.getElementById("show-courses").addEventListener('click', function() {
 
 	showCourses();
@@ -533,13 +559,14 @@ function showCourses() {
 
 function printCourseDetail(courseDetailValues) {
 	document.getElementById("showMyProfile").style.display = "none";
-	document.getElementById("PostAssignment").style.display="none";
+	document.getElementById("PostAssignment").style.display = "none";
 	document.getElementById("home").style.display = "none";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("containers").style.display = "grid";
 	document.getElementById("containers").innerHTML = "";
 	let courseDetail = JSON.parse(courseDetailValues);
 	this.allCourseDetails = courseDetail;
+	sessionStorage.setItem("courseJson", JSON.stringify(courseDetail));
 	for (let i in courseDetail) {
 		document.getElementById("containers").appendChild(document.createElement("br"));
 		var box = document.createElement("div");
@@ -560,9 +587,11 @@ function printCourseDetail(courseDetailValues) {
 }
 
 function showCourseDetails(keyValue) {
+	sessionStorage.setItem("courseId", keyValue);
 	let courseDetail = this.allCourseDetails;
 	console.log(courseDetail);
 	let value = "" + keyValue;
+	this.certificateCourseId = keyValue;
 	let showCourses = document.getElementById("showCourse-details");
 
 	document.getElementById("containers").style.display = "none";
@@ -574,9 +603,10 @@ function showCourseDetails(keyValue) {
 	heading.innerHTML = courseDetail[value]['name'];
 	showCourses.appendChild(heading);
 
-	showCourses.appendChild(document.createElement("hr"));
-
-	isRegister(courseDetail[value]['courseid']).then(function(result) {
+	
+	let isStaff;
+	isRegister(courseDetail[value]['courseid'], courseDetail[value]['staffId']).then(function(result) {
+		isStaff = result;
 		if (result == "-1") {
 			let register = document.createElement("button");
 			register.setAttribute('id', 'register-course');
@@ -584,9 +614,12 @@ function showCourseDetails(keyValue) {
 			register.setAttribute("onclick", "register(" + courseDetail[value]['courseid'] + ")");
 			register.innerHTML = "Register";
 			document.getElementById("showCourse-details").appendChild(register);
-			showCourses.appendChild(document.createElement("hr"));
+			showCourses.appendChild(document.createElement("br"));
+			showCourses.appendChild(document.createElement("br"));
+			
 		}
 	});
+	
 	getModules(courseDetail[value]['courseid']).then(function(result) {
 		var modules = JSON.parse(result);
 		console.log(modules);
@@ -596,8 +629,8 @@ function showCourseDetails(keyValue) {
 			modulesDiv.setAttribute("class", "modulesDiv");
 
 			var weekHeading = document.createElement("h4");
-			weekHeading.setAttribute("id", "Week" + modules[i]['weeks']);
-			weekHeading.appendChild(document.createTextNode("week " + modules[i]['weeks']));
+			weekHeading.setAttribute("id", "week" + modules[i]['weeks']);
+			weekHeading.appendChild(document.createTextNode("Module " + modules[i]['weeks']));
 			modulesDiv.appendChild(weekHeading);
 
 			var modulesHeading = document.createElement("h4");
@@ -605,23 +638,19 @@ function showCourseDetails(keyValue) {
 			modulesHeading.setAttribute("class", "modulesHeading");
 			modulesHeading.appendChild(document.createTextNode(modules[i]['module']));
 			modulesDiv.appendChild(modulesHeading);
-			showCourses.appendChild(modulesDiv);
+			
 
 			var vedioLink = document.createElement("button");
 			vedioLink.setAttribute("onclick", "showVedioLink(" + modules[i]['courseid'] + "," + modules[i]['weeks'] + ")");
 			vedioLink.innerHTML = "Vedio";
-			showCourses.appendChild(vedioLink);
+			modulesDiv.appendChild(vedioLink);
+			showCourses.appendChild(modulesDiv);
+			
 		}
 
 		showCourses.appendChild(document.createElement('br'));
 		showCourses.appendChild(document.createElement('br'));
-		var quiz = document.createElement("button");
-		quiz.setAttribute("id", courseDetail[value]['courseid']);
-		quiz.setAttribute("onclick", "getQuizQuestions(" + courseDetail[value]['courseid'] + ")");
-		quiz.innerHTML = "Take Quiz";
-		showCourses.appendChild(quiz);
-
-
+		
 	});
 
 
@@ -642,12 +671,19 @@ function showCourseDetails(keyValue) {
 	readingMaterial.setAttribute("onclick", "getReadingMaterial(" + courseDetail[value]['courseid'] + ")");
 	readingMaterial.innerHTML = "ReadingMaterial";
 	showCourses.appendChild(readingMaterial);
-
-
+	
+	if (isStaff != "1") {
+			var quiz = document.createElement("button");
+			quiz.setAttribute("id", courseDetail[value]['courseid']);
+			quiz.setAttribute("class","course-button");
+			quiz.setAttribute("onclick", "getQuizQuestions(" + courseDetail[value]['courseid'] + ")");
+			quiz.innerHTML = "Take Quiz";
+		showCourses.appendChild(quiz);
+	}
 }
 
 
-function isRegister(courseid) {
+function isRegister(courseid, staffId) {
 	let courseId = courseid;
 	console.log(courseid);
 	var promise = new Promise(function(resolve, reject) {// study
@@ -657,11 +693,12 @@ function isRegister(courseid) {
 				resolve(xhr.responseText);
 			}
 		}
-		xhr.open("GET", "http://localhost:8080/Course_Management/IsRegister?courseId=" + courseId);
+		xhr.open("GET", "http://localhost:8080/Course_Management/IsRegister?courseId=" + courseId + "&staffId=" + staffId);
 		xhr.send();
 	});
 	return promise;
 }
+
 function getModules(courseid) {
 	var promise = new Promise(function(resolve, reject) {
 		var http = new XMLHttpRequest();
@@ -735,9 +772,8 @@ function showVedioLink(courseid, week) {
 				swal("Error", "Please Login to view the vedio", "error");
 			else if (result == "-2")
 				swal("Error", "Please Register course to view the vedio", "error");
-			else if(result>0)
-			{
-				
+			else if (result >0) {
+				swal("Error", "Vedio will Open in "+result+"  days","error");
 			}
 			else
 				window.open(result, "", 'width=400,height=400,top=200px,left=100px,display=absolute');
@@ -748,8 +784,8 @@ function showVedioLink(courseid, week) {
 
 }
 /* ==================================MY COURSE ==================================*/
-function getMyCourse(){
-	let http =new XMLHttpRequest();
+function getMyCourse() {
+	let http = new XMLHttpRequest();
 	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
 			let result = http.responseText;
@@ -770,27 +806,44 @@ document.getElementById("myProfile").addEventListener('click', function() {
 	document.getElementById("containers").style.display = "none";
 	document.getElementById("home").style.display = "none";
 	document.getElementById("about").style.display = "none";
-	document.getElementById("PostAssignment").style.display="none";
+	document.getElementById("PostAssignment").style.display = "none";
 	document.getElementById("showMyProfile").style.display = "block";
 
 	showMyProfile();
 });
 
-function showMyProfile() {
+document.getElementById("staffProfile").addEventListener('click', function() {
+	document.getElementById("containers").style.display = "none";
+	document.getElementById("home").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("PostAssignment").style.display = "none";
+	document.getElementById("showMyProfile").style.display = "block";
+	showMyProfile();
+});
 
+
+function showMyProfile() {
 	let http = new XMLHttpRequest();
 	let myProfileDiv = document.getElementById("showMyProfile");
-	myProfileDiv.innerHTML = "";
 	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
 			var result = http.responseText;
 			var myProfile = JSON.parse(result);
-
-			let myProfileHeading = document.createElement("h2");
+			console.log(myProfile);
+			/*let myProfileHeading = document.createElement("h2");
 			myProfileHeading.appendChild(document.createTextNode("My Profile"));
-			myProfileDiv.appendChild(myProfileHeading);
+			myProfileDiv.appendChild(myProfileHeading);*/
 
-			let label1 = document.createElement("label");
+			document.getElementById("myName").innerHTML=myProfile['name'];
+			document.getElementById("myMailId").innerHTML=myProfile['mail'];
+			document.getElementById("myDob").innerHTML="DOB :"+ myProfile['dob'];
+			document.getElementById("myNo").innerHTML="Phone no:"+myProfile['phoneNo'];
+			document.getElementById("myQualification").innerHTML="Qualification : "+myProfile['qualification'];
+			if (myProfile['option'] == "staff") {
+				document.getElementById("myExperience").innerHTML="Experience : "+myProfile['experience'];
+			}
+			
+			/*let label1 = document.createElement("label");
 			label1.setAttribute("class", "myProfileLabel");
 			label1.appendChild(document.createTextNode("Name :" + myProfile['name']));
 			myProfileDiv.appendChild(label1);
@@ -826,7 +879,9 @@ function showMyProfile() {
 			label6.setAttribute("class", "myProfileLabel");
 			label6.appendChild(document.createTextNode("Qualification : " + myProfile['qualification']));
 			myProfileDiv.appendChild(label6);
-			myProfileDiv.appendChild(document.createElement("br"));
+			myProfileDiv.appendChild(document.createElement("br"));*/
+			
+			
 		}
 	}
 	http.open("GET", "http://localhost:8080/Course_Management/ShowMyProfile");
@@ -842,7 +897,7 @@ var courseid;
 
 
 function getQuizQuestions(courseid) {
-	this.courseid=courseid;
+	this.courseid = courseid;
 	let http = new XMLHttpRequest();
 	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
@@ -894,13 +949,12 @@ function test(pageCount) {
 		optionsDiv.appendChild(label);
 		optionsDiv.appendChild(document.createElement("br"));
 	}
-	if(pageCount==Object.keys(questionAnswerJson).length-1)
-	{
-		document.getElementById("nextSubmit").style.display="block";
-		
-	/*document.getElementsByClassName("quiz-submit").style.display="block";*/
-	
-		document.getElementById("nextQuestion").style.display="none";
+	if (pageCount == Object.keys(questionAnswerJson).length - 1) {
+		document.getElementById("nextSubmit").style.display = "block";
+
+		/*document.getElementsByClassName("quiz-submit").style.display="block";*/
+
+		document.getElementById("nextQuestion").style.display = "none";
 	}
 }
 
@@ -933,49 +987,78 @@ function answerCheck() {
 	}
 }
 
-function submitQuiz(){
+var marks;
+var closeCertificate;
+
+function submitQuiz() {
 	let http = new XMLHttpRequest();
 	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
 			console.log(http.responseText);
-			let result=http.responseText;
-			if(parseFloat(result)>60)
-			{
-				alert("passed");
+			let result = http.responseText;
+			marks = result;
+			sessionStorage.setItem("marks", result);
+			sessionStorage.setItem("cer_name", pName);
+			if (parseFloat(result) > 60) {
+				//window.open("./Home/certificate.html");
+				//sessionStorage.setItem("closeTab",closeCertificate);
+				window.location.href = "./Home/certificate.html";
 			}
-			else{
-				alert("fail");
-			}
-		}	
+		}
 	}
-	http.open("GET", "http://localhost:8080/Course_Management/QuizScore?courseid="+this.courseid.toString()+"&mark="+this.mark.toString()+"&totalQuestion="+(Object.keys(this.questionAnswer).length).toString());
-	http.send();	
+	http.open("GET", "http://localhost:8080/Course_Management/QuizScore?courseid=" + this.courseid.toString() + "&mark=" + this.mark.toString() + "&totalQuestion=" + (Object.keys(this.questionAnswer).length).toString());
+	http.send();
 }
 
-/*------------------------- ASSIGNMENT ----------------------*/
-document.getElementById("Assignment").addEventListener('click',function(){
-	document.getElementById("home").style.display="none";
-	document.getElementById("about").style.display="none";
-	document.getElementById("showMyProfile").style.display="none";
-	document.getElementById("PostAssignment").style.display="block";
+function downloadCertificate() {
+	const certificate = document.getElementById("certificate");
+	html2pdf().from(certificate).save();
+	setTimeout(function() {
+		location.replace("../Login.html");
+	}, 1000);
+
+
+}
+
+function getCertificate() {
+	var nameBtag = document.createElement("b");
+	nameBtag.appendChild(document.createTextNode(sessionStorage.getItem("cer_name").toUpperCase()));
+	document.getElementById("cer-name").appendChild(nameBtag);
+	document.getElementById("cer-course").innerHTML = JSON.parse(sessionStorage.getItem("courseJson"))[sessionStorage.getItem('courseId')]['name'];;
+	document.getElementById("totalPercent").innerHTML = sessionStorage.getItem("marks") + "%";
+	let date = new Date().toUTCString().slice(5, 16);
+	document.getElementById("cer-date").innerHTML = date;
+
+}
+
+
+
+/*------------------------- ASSIGNMENT ------------------------------------*/
+
+document.getElementById("Assignment").addEventListener('click', function() {
+	document.getElementById("home").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("showMyProfile").style.display = "none";
+	document.getElementById("PostAssignment").style.display = "block";
 	getStaffCourseDetail();
 });
 
-function getStaffCourseDetail(){
+function getStaffCourseDetail() {
 	let http = new XMLHttpRequest();
 	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
 			console.log(http.responseText);
-			let result=http.responseText;
+			let result = http.responseText;
 			console.log(result);
 			printStaffCourseDetail(result);
-		}	
+		}
 	}
 	http.open("GET", "http://localhost:8080/Course_Management/GetStaffCourseDetail");
 	http.send();
 }
 
 function printStaffCourseDetail(courseDetailValues) {
+	document.getElementById("AssignmentDiv").style.display = "none";
 	document.getElementById("showMyProfile").style.display = "none";
 	document.getElementById("home").style.display = "none";
 	document.getElementById("about").style.display = "none";
@@ -983,23 +1066,75 @@ function printStaffCourseDetail(courseDetailValues) {
 	document.getElementById("containers").innerHTML = "";
 	let courseDetail = JSON.parse(courseDetailValues);
 	this.allCourseDetails = courseDetail;
+	document.getElementById("PostAssignment").innerHTML = "";
 	for (let i in courseDetail) {
-		
-		document.getElementById("PostAssignment").appendChild(document.createElement("br"));
 		var box = document.createElement("div");
 		box.setAttribute('class', 'box')
 		box.setAttribute('value', courseDetail[i]['courseid']);
-		var heading = document.createElement("h2");
+		var heading = document.createElement("h1");
 		heading.appendChild(document.createTextNode(courseDetail[i]['name']));
 		box.appendChild(heading)
 		box.appendChild(document.createElement("br"));
-		var durationTag = document.createElement("span")
-		durationTag.appendChild(document.createTextNode("Staff: " + courseDetail[i]['staff']))
-		box.appendChild(durationTag)
-		box.setAttribute('onclick', "showCourseDetails(" + i + ")");
-		box.appendChild(document.createElement("br"));
-		box.appendChild(document.createTextNode("weeks: " + courseDetail[i]['duration']));
+		var showCourseDetails = document.createElement("button");
+		showCourseDetails.setAttribute('onclick', "showCourseDetails(" + i + ")");
+		showCourseDetails.innerHTML = "Show Course";
+		box.appendChild(showCourseDetails);
+		var postAssignment = document.createElement("button");
+		postAssignment.setAttribute("onclick", "postAssignment()");
+		postAssignment.innerHTML = "PostAssignment";
+		box.appendChild(postAssignment);
+		var assignmentHistory = document.createElement("button");
+		assignmentHistory.setAttribute('onclick', "postAssignment()");
+		assignmentHistory.innerHTML = "assignment History";
+		box.appendChild(assignmentHistory);
+
 		document.getElementById("PostAssignment").appendChild(box);
 	}
+}
+function postAssignment() {
+	document.getElementById("PostAssignment").style.display = "none";
+	document.getElementById("AssignmentDiv").style.display = "block";
+	document.getElementById("getQuestion").style.display = "none";
+	let box = document.querySelector("#AssignmentDiv");
+}
+function getTotalQuestion() {
+	let assignmentTopic = document.getElementById("assignmentTopic").value;
+
+	console.log(assignmentTopic);
+
+	if (assignmentTopic == null || assignmentTopic == "" || assignmentTopic == undefined) {
+		swal("Please Enter assignment topic");
+		document.getElementById("assignmentTopic").value = "";
+		return;
+	}
+	document.getElementById("getNumberOfQuestion").style.display = "none";
+	document.getElementById("getQuestion").style.display = "block";
+	document.getElementById("submitAssignment").style.display = "none";
+}
+var questionNo=0;
+var jsonQuestion;
+function storeCurrentQuestion() {
+	let question = document.getElementById("Question").value;
+	let option1 = document.getElementById("option1").value;
+	let option2 = document.getElementById("option2").value;
+	let option3 = document.getElementById("option3").value;
+	let option4 = document.getElementById("option4").value;
+	let answer = document.getElementById("answer").value;
+	if (question == "" || question == null) {
+
+	}
+	else if (option1 == "" || option1 == null) {
+
+	}
+	else if (option2 == "" || option2 == null) {
+
+	} else if (option3 == "" || option3 == null) {
+
+	} else if (option4 == "" || option4 == null) {
+
+	} else if (answer == "" || answer == null) {
+
+	}
+	
 }
 

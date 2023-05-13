@@ -27,11 +27,20 @@ public class GetVedioLink extends HttpServlet {
 		String week=(String)request.getParameter("week");
 		HttpSession session = request.getSession();
 		String userName=(String)session.getAttribute("name");
-		if(isRegister.isRegistered(Integer.parseInt(courseid),userName)==1)
+		long val=isRegister.isRegistered(Integer.parseInt(courseid),userName);
+		int weekNo=Integer.parseInt(week);
+		System.out.println(val);
+		if(val>=1)
 		{
-			String vedioLink=vedio.getVedio(Integer.parseInt(courseid), Integer.parseInt(week),userName);
-			System.out.println(vedioLink);
-			response.getWriter().append(""+vedioLink);
+			int days=weekNo*7;
+			if(days<=val) {
+				String vedioLink=vedio.getVedio(Integer.parseInt(courseid), Integer.parseInt(week),userName);
+				System.out.println(vedioLink);
+				response.getWriter().append(""+vedioLink);
+			}
+			else {
+				response.getWriter().append(""+(days-val));
+			}
 		}
 		else {
 			response.getWriter().print(-2);

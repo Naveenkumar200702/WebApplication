@@ -3,22 +3,49 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Login</title>
-<link rel="stylesheet" href="./Admin.html">
+<link rel="stylesheet" href="./Admin.css">
 </head>
 
 
-<body id="quizBody">
+<body id="quizBody" onLoad="findSession()">
 
-<button id="adminLogin" > Admin</button>
+
 
 <div id="LoginWindow">
-	<label>UserName : </label><input type="text" id="loginpassword" oninput="checkUsername()"/><br>
+	<h1 id="Heading"> Admin</h1>
+	<label>UserName : </label><input type="text" id="loginusername"/><br>
 	<span id="erUsername"></span><br>
-	<label>Password : </label><input type="password" id="loginusername" oninput="checkPassword()"/><br>
+	<label>Password : </label><input type="password" id="loginpassword" onchange="checkPassword()"/><br>
 	<span id="erPassword"></span>
 	<br>
-	<button id="submit" onclick="login()">Login</button>
+	<button id="login" onclick="login()">Login</button>
 </div>
+
+
+<div id="adminMenu">
+<button id="logOut"> LogOut</button>
+<div id="Menu">
+	<table id="adminMenuTable">
+		<tr>
+			<td id="staffRequest">Staff Selection</td> 	
+			<td>New Course</td>
+		</tr>
+	</table>
+</div>
+</div>
+
+<div id="staffRequestMenu">
+
+<div id="header"> <h1> Staff Request</h1><button id="goBack">Back</button></div>
+
+<div id="staffDetails">
+	
+
+
+</div>
+
+</div>
+
 </body>
 <script src="./Admin.js"></script>
 </html>

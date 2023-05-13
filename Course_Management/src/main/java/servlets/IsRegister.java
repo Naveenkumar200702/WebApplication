@@ -27,8 +27,12 @@ public class IsRegister extends HttpServlet {
 		HttpSession session =request.getSession();
 		String studentId=(String) session.getAttribute("name");
 		String courseId=(String) request.getParameter("courseId");
+		String staffId=(String) request.getParameter("staffId");
 		System.out.println(courseId);
-		int flag=isCourseRegistered.isRegistered(Integer.parseInt(courseId),studentId);
+		int flag=isCourseRegistered.isRegistered(Integer.parseInt(courseId),studentId);// int converted into long check this later
+		if(staffId.equals(studentId)){
+			flag=1;
+		}
 		response.getWriter().print(flag);
 	}
 }

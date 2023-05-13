@@ -7,15 +7,16 @@ body {
 	font-family: 'Rubik', sans-serif;
 	max-width: 100%;
 	overflow-x: hidden;
-	background-image: url("../Images/background.png");
+	/*background-image: url("../Images/background.png");*/
+	background: linear-gradient(to bottom right, rgb(246, 246, 246),
+		rgb(255, 255, 255), rgb(251, 251, 251), rgb(247, 247, 247),
+		rgb(255, 255, 255));
 }
 
 .error {
 	color: red;
 	font-size: 15px;
 }
-
-
 
 #showLoginUser {
 	float: right;
@@ -27,9 +28,10 @@ body {
 }
 
 /*------------------------HEADER AND LOGO ------------------------ */
-#Assignment{
-	display:none;
+#Assignment {
+	display: none;
 }
+
 #dropdownProfile, #LogOut {
 	display: none;
 }
@@ -63,7 +65,7 @@ header nav {
 	margin-left: 26%;
 }
 
-header nav a{
+header nav a {
 	float: left;
 	width: 150px;
 	height: 50px;
@@ -79,25 +81,15 @@ header nav a{
 	cursor: pointer;
 }
 
-
 /* ===============================DROP DOWN======================== */
-
 .dropdown {
-  float: left;
-  overflow: hidden;
+	float: left;
+	overflow: hidden;
 }
 
 .dropdown .dropbtn {
- /*  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0; */
-  	border:none;
-  	float: left;
+	border: none;
+	float: left;
 	width: 150px;
 	height: 50px;
 	text-decoration: none;
@@ -113,39 +105,38 @@ header nav a{
 }
 
 .dropdown:hover .dropbtn {
-  background-color: black;
-  color:white;
+	background-color: black;
+	color: white;
 }
 
 .dropdown-content {
-	margin-top:3%;
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+	margin-top: 3%;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
 }
 
 .dropdown-content a {
-  float: none;
-  color: black;
-  padding: 7px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
+	float: none;
+	color: black;
+	padding: 7px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+	background-color: #ddd;
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+	display: block;
 }
 /* ======================================================= */
-
-header nav a:after  {
+header nav a:after {
 	content: "";
 	position: absolute;
 	bottom: 0;
@@ -160,11 +151,11 @@ header nav a:after  {
 	z-index: -1;
 }
 
-header nav a:hover::after  {
+header nav a:hover::after {
 	transform: scaleY(1);
 }
 
-header nav a:hover{
+header nav a:hover {
 	color: #fff;
 }
 
@@ -200,7 +191,7 @@ header nav a:hover{
 	width: 23%;
 	background-color: #fff;
 	text-align: center;
-	border:2px solid;
+	border: 2px solid;
 }
 
 .close {
@@ -302,7 +293,7 @@ header nav a:hover{
 	float: left;
 	overflow-y: auto;
 	background-color: #fff;
-	border:2px solid;
+	border: 2px solid;
 }
 
 .signupClose {
@@ -459,24 +450,79 @@ h1 {
 }
 
 /* =================================HOME ============================================= */
-#imagehover {
-	padding: 2%;
-	height: 55vh;
-	width: 80%;
-	background-color: yellow;
-	margin-left: 8%;
-	margin-top: 7vh;
-	border-radius: 20px;
-	background-image: url('../Images/study.png');
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Verdana, sans-serif;
+}
+
+.mySlides {
+	display: none;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.slideshow-container {
+	margin-top : 5%;
+	margin-left:5%;
+	max-width: 90%;
+	max-height:100vh;
 	box-shadow: 5px 10px 18px #888888;
+}
+
+.slideshow-container .mySlides .slideContent{
+	padding-top:15%;
+	padding-left:2%;
+	float:left;
+	width: 50%;
+	height: 70vh;
+	box-shadow: 5px 10px 18px #888888;
+	font-family: "Georgia", Times, serif;
+ 	align-content:center;
+ 	font-size: 300%;
+}
+
+ .slideshow-container .mySlides .slideImage {
+ 	width: 50%;
+	height: 70vh;
+ 	float:right;
+ }
+ .slideshow-container .mySlides .slideImage img{
+ 	border-radius:10px;
+ 	height:100%;
+ 	width:100%;
+ }
+
+
+.dot {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	margin-top:10px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+#dots{
+	margin-top:10px;
+	text-align: center;
+}
+
+.active {
+	background-color: #717171;
 }
 
 #content1 {
 	padding: 2%;
 	height: 55vh;
-	width: 80%;
+	width: 90%;
 	background-color: yellow;
-	margin-left: 8%;
+	margin-left: 5%;
 	margin-top: 7vh;
 	border-radius: 20px;
 	display: flex;
@@ -485,7 +531,7 @@ h1 {
 }
 
 #content1 #content1Left {
-	height: 55vh;
+	
 	width: 50%;
 	background-image: url("../Images/learnwithoutlimit.png");
 	background-size: contain;
@@ -494,15 +540,17 @@ h1 {
 	border-radius: 20px;
 }
 
+
 #content1Right {
 	width: 30%;
-	font-size: 20px;
+	font-size: 130%;
 	font-style: italic;
 }
 
-/* ======================================SHOW COURSES======================================== */
 
+/* ======================================SHOW COURSES======================================== */
 #containers {
+
 	position: absolute;
 	width: 80%;
 	margin-left: 10%;
@@ -510,10 +558,11 @@ h1 {
 	padding-bottom: 5%;
 	display: grid;
 	grid-template-columns: auto auto auto;
-	padding-left: 7%;
 	margin-top: 5%;
-	z-index:-1;
+	z-index: -1;
 }
+
+
 
 .box {
 	margin: 5px;
@@ -521,15 +570,14 @@ h1 {
 	padding: 5%;
 	padding-bottom: 10%;
 	margin-bottom: 80px;
-	width: 50%;
-	border:1px cyan solid;
+	width: 65%;
+	border: 1px cyan solid;
 	background-color: #ccfcee;
 	border-radius: 8px;
 	border-top: 2px solid hsl(180, 62%, 55%);
 	box-shadow: 5px 10px 20px hsl(245, 75%, 90%);
-	cursor:pointer;
-	transform:transition(0,0);
-	
+	cursor: pointer;
+	transform: transition(0, 0);
 }
 
 .box:hover {
@@ -537,11 +585,11 @@ h1 {
 	border-radius: 8px;
 	border-top: 2px solid hsl(157, 67%, 55%);
 	box-shadow: 5px 10px 20px hsl(143, 84%, 65%);
-	border:2px cyan solid;
-	transform:transitionX(2px) transitionY(2px);
-	
+	border: 2px cyan solid;
+	transform: transitionX(2px) transitionY(2px);
 }
-#view-course{
+
+#view-course {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -550,72 +598,596 @@ h1 {
 	background-color: rgba(0, 0, 0, 0.5);
 	display: none;
 	justify-content: center;
-	align-items: center;	
+	align-items: center;
 }
-#showCourse-details{
-	position:fixed;
-	padding-left:5%;
-	margin-left:5%;
-	width:85%;
-	height:90%;
-	background-color:white;
-	top:5%;
+
+#showCourse-details {
+	
+	position: fixed;
+	padding-left: 2%;
+	margin-left: 18%;
+	width: 60%;
+	height: 90%;
+	background-color: white;
+	top: 5%;
 	overflow-y: auto;
+	align-content: center;
 }
-#course-heading{
-	text-align:center;
+
+#showCourse-details ::-webkit-scrollbar {
+    display: none;
 }
-#backButton{
-	cursor:pointer;
-	float:right;
-	color:white;
-	font-size:143%;
+
+#course-heading {
+	text-align: center;
 }
-.course-button{
-	width:10%;
-	height:5%;
-	border-radius:10px;
-	cursor:pointer;	
+
+#backButton {
+	margin-top:2%;
+	cursor: pointer;
+	margin-right: 21%;
+	float: right;
+	height:10px;
+	width:10px;
+	color: white;
+	font-size: 143%;
+	z-index:999;
 }
-.box h2{
+#backButton img{
+
+ height: 31px;
+}
+
+.course-button {
+	width: 21%;
+    height: 6%;
+	border-radius: 10px;
+	cursor: pointer;
+	background-color:#ddd5f1;
+}
+
+.box h2 {
 	text-align: center;
 	text-transform: uppercase;
 }
-/*=============================== MY PROFILE=====================================*/
-#showMyProfile{
-	display:none;
-	margin-top:3%;
-	width:70%;
-	height:80vh;
-	margin-left:15%;
-	background-color:#d6d4d4;
-	box-shadow: 5px 10px 15px hsl(245, 75%, 90%);
 
-}
-
-/*================================================================================*/
+ #showCourse-details .modulesDiv{
+ 	border:solid black 1px;
+ 	width: 78%;
+ 	padding-left:5%;
+ 	padding-bottom: 2%; 
+ 	margin-left: 8%;
+    text-align: center;
+ }
+ 
+ #showCourse-details .modulesDiv button{
+ height:12%;
+ width:20%;
+ }
+ 
+ #staffName,#numberOfWeeks,.course-button{
+	margin-left: 8%;
+ }
+ 
 /* ==========================  QUIZ QUESTIONS  ====================================*/
-#quizQuestion{
-	display:none;
-	position:fixed;
-	padding-left:5%;
-	margin-left:5%;
-	width:85%;
-	height:90%;
-	background-color:white;
-	top:5%;
-	overflow-y: auto;	
+#quizQuestion {
+	display: none;
+	position: fixed;
+	padding-left: 5%;
+	margin-left: 5%;
+	width: 85%;
+	height: 90%;
+	background-color: white;
+	top: 5%;
+	overflow-y: auto;
 }
 
-#view-course #quizQuestion .quiz-submit{
-	display:none;
-} 
+#view-course #quizQuestion .quiz-submit {
+	display: none;
+}
 
 /* ======================== POST ASSIGNMENT ===========================*/
-#PostAssignment{
-	display:none;
-	height:90vh;
-	left:80%;
+#PostAssignment {
+	display: none;
+	height: 90vh;
+	left: 80%;
 	background-color: white;
 }
 
+#AssignmentDiv {
+	display: none;
+	height: 90vh;
+	left: 80%;
+	background-color: white
+}
+
+
+/*=============================== MY PROFILE=====================================*/
+/* #showMyProfile {
+	display: none;
+	margin-top: 3%;
+	width: 70%;
+	height: 80vh;
+	margin-left: 15%;
+	background-color: #d6d4d4;
+	box-shadow: 5px 10px 15px hsl(245, 75%, 90%);
+} */
+
+html {
+        height: 100%;
+      }
+      
+    
+      
+      #showMyProfile {
+        overflow: hidden;
+        background: #bcdee7 url("../img/bg.jpg") no-repeat center center fixed;
+        background-size: cover;
+        position: fixed;
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        height: 80vh;
+        font: normal 14px/1.618em "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      #showMyProfile:before {
+        content: "";
+        height: 0px;
+        padding: 0px;
+        border: 130em solid #313440;
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        z-index: 2;
+        display: block;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+        animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+      }
+      
+      .profile-card header h1, h2 {
+        font-weight: 500;
+        margin: 0px 0px 5px 0px;
+      }
+      
+      .profile-card header h1 {
+        font-size: 24px;
+      }
+      
+      .profile-card header h2 {
+        font-size: 13px;
+      }
+      
+      .profile-bio h2{
+      font-size: 18px;
+      }
+      
+      .profile-card {
+        background: #FFB300;
+        width: 70px;
+        height: 56px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 2;
+        overflow: hidden;
+        opacity: 0;
+        margin-top: 70px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+        -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+      }
+      
+      .profile-card header {
+        width: 179px;
+        height: 280px;
+        padding: 40px 20px 30px 20px;
+        display: inline-block;
+        border-right: 2px dashed #EEEEEE;
+        background: #FFFFFF;
+        color: #000000;
+        margin-top: 50px;
+        margin-right:25%;
+        opacity: 0;
+        text-align: center;
+        -webkit-animation: moveIn 1s 3.1s ease forwards;
+        animation: moveIn 1s 3.1s ease forwards;
+      }
+      
+      .profile-card header h1 {
+        color: #FF5722;
+      }
+      
+      .profile-card header a {
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        margin: 25px 30px;
+      }
+      
+      .profile-card header a:after {
+        position: absolute;
+        content: "";
+        bottom: 3px;
+        right: 3px;
+        width: 20px;
+        height: 20px;
+        border: 4px solid #FFFFFF;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        background: -webkit-linear-gradient(top, #2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
+        background: linear-gradient(#2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        -webkit-animation: scaleIn 0.3s 3.5s ease forwards;
+        animation: scaleIn 0.3s 3.5s ease forwards;
+      }
+      
+      .profile-card header a > img {
+        width: 120px;
+        max-width: 100%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-transition: -webkit-box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease;
+        -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+      }
+      
+      .profile-card header a:hover > img {
+        -webkit-box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .profile-card .profile-bio {
+        width: 175px;
+        height: 180px;
+        display: inline-block;
+        float: right;
+        padding: 50px 20px 30px 20px;
+        background: #FFFFFF;
+        color: #333333;
+        margin-top: 50px;
+        text-align: center;
+        opacity: 0;
+        -webkit-animation: moveIn 1s 3.1s ease forwards;
+        animation: moveIn 1s 3.1s ease forwards;
+      }
+      
+      .profile-social-links {
+        width: 218px;
+        display: inline-block;
+        float: right;
+        margin: 0px;
+        padding: 15px 20px;
+        background: #FFFFFF;
+        margin-top: 50px;
+        text-align: center;
+        opacity: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-animation: moveIn 1s 3.1s ease forwards;
+        animation: moveIn 1s 3.1s ease forwards;
+      }
+      
+      .profile-social-links li {
+        list-style: none;
+        margin: -5px 0px 0px 0px;
+        padding: 0px;
+        float: left;
+        width: 25%;
+        text-align: center;
+      }
+      
+      .profile-social-links li a {
+        display: inline-block;
+        color: red;
+        width: 24px;
+        height: 24px;
+        padding: 6px;
+        position: relative;
+        overflow: hidden!important;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+      }
+      
+      .profile-social-links li a i {
+        position: relative;
+        z-index: 1;
+      }
+      
+      .profile-social-links li a img,
+      .profile-social-links li a svg {
+        width: 24px;
+      }
+      
+      @-webkit-keyframes init {
+        0% {
+          width: 0px;
+          height: 0px;
+        }
+        100% {
+          width: 56px;
+          height: 56px;
+          margin-top: 0px;
+          opacity: 1;
+        }
+      }
+      
+      @keyframes init {
+        0% {
+          width: 0px;
+          height: 0px;
+        }
+        100% {
+          width: 56px;
+          height: 56px;
+          margin-top: 0px;
+          opacity: 1;
+        }
+      }
+      
+      @-webkit-keyframes puff {
+        0% {
+          top: 100%;
+          height: 0px;
+          padding: 0px;
+        }
+        100% {
+          top: 50%;
+          height: 100%;
+          padding: 0px 100%;
+        }
+      }
+      
+      @keyframes puff {
+        0% {
+          top: 100%;
+          height: 0px;
+          padding: 0px;
+        }
+        100% {
+          top: 50%;
+          height: 100%;
+          padding: 0px 100%;
+        }
+      }
+      
+      @-webkit-keyframes borderRadius {
+        0% {
+          -webkit-border-radius: 50%;
+        }
+        100% {
+          -webkit-border-radius: 0px;
+        }
+      }
+      
+      @keyframes borderRadius {
+        0% {
+          -webkit-border-radius: 50%;
+        }
+        100% {
+          border-radius: 0px;
+        }
+      }
+      
+      @-webkit-keyframes moveDown {
+        0% {
+          top: 50%;
+        }
+        50% {
+          top: 40%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      
+      @keyframes moveDown {
+        0% {
+          top: 50%;
+        }
+        50% {
+          top: 40%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      
+      @-webkit-keyframes moveUp {
+        0% {
+          background: #FFB300;
+          top: 100%;
+        }
+        50% {
+          top: 40%;
+        }
+        100% {
+          top: 50%;
+          background: #E0E0E0;
+        }
+      }
+      
+      @keyframes moveUp {
+        0% {
+          background: #FFB300;
+          top: 100%;
+        }
+        50% {
+          top: 40%;
+        }
+        100% {
+          top: 50%;
+          background: #E0E0E0;
+        }
+      }
+      
+      @-webkit-keyframes materia {
+        0% {
+          background: #E0E0E0;
+        }
+        50% {
+          -webkit-border-radius: 4px;
+        }
+        100% {
+          width: 440px;
+          height: 280px;
+          background: #FFFFFF;
+          -webkit-border-radius: 4px;
+        }
+      }
+      
+      @keyframes materia {
+        0% {
+          background: #E0E0E0;
+        }
+        50% {
+          border-radius: 4px;
+        }
+        100% {
+          width: 440px;
+          height: 280px;
+          background: #FFFFFF;
+          border-radius: 4px;
+        }
+      }
+      
+      @-webkit-keyframes moveIn {
+        0% {
+          margin-top: 50px;
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+          margin-top: -20px;
+        }
+      }
+      
+      @keyframes moveIn {
+        0% {
+          margin-top: 50px;
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+          margin-top: -20px;
+        }
+      }
+      
+      @-webkit-keyframes scaleIn {
+        0% {
+          -webkit-transform: scale(0);
+        }
+        100% {
+          -webkit-transform: scale(1);
+        }
+      }
+      
+      @keyframes scaleIn {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      
+      @-webkit-keyframes ripple {
+        0% {
+          transform: scale3d(0, 0, 0);
+        }
+        50%,
+        100% {
+          -webkit-transform: scale3d(1, 1, 1);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes ripple {
+        0% {
+          transform: scale3d(0, 0, 0);
+        }
+        50%,
+        100% {
+          transform: scale3d(1, 1, 1);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      
+      @media screen and (min-aspect-ratio: 4/3) {
+        body {
+          background-size: cover;
+        }
+        body:before {
+          width: 0px;
+        }
+        @keyframes puff {
+          0% {
+            top: 100%;
+            width: 0px;
+            padding-bottom: 0px;
+          }
+          100% {
+            top: 50%;
+            width: 100%;
+            padding-bottom: 100%;
+          }
+        }
+      }
+      
+      @media screen and (min-height: 480px) {
+        .profile-card header {
+          width: auto;
+          height: auto;
+          padding: 30px 20px;
+          display: block;
+          float: none;
+          border-right: none;
+        }
+        .profile-card .profile-bio {
+          width: auto;
+          height: auto;
+          padding: 15px 20px 30px 20px;
+          display: block;
+          float: none;
+        }
+        .profile-social-links {
+          width: 100%;
+          display: block;
+          float: none;
+        }
+        @keyframes materia {
+          0% {
+            background: #E0E0E0;
+          }
+          50% {
+            border-radius: 4px;
+          }
+          100% {
+            width: 280px;
+            height: 440px;
+            background: #FFFFFF;
+            border-radius: 4px;
+          }
+        }
+      }
+
+
+/*================================================================================*/

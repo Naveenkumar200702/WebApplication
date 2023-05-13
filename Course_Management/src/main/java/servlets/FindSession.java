@@ -27,10 +27,13 @@ public class FindSession extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("name");
 		String user = (String) session.getAttribute("option");
+		String pName=(String) session.getAttribute("ofName");
 		if (name != null) {
 			JSONObject result=new JSONObject();
 			result.put("name",name);
 			result.put("user",user);
+			result.put("pName",pName);
+			
 				response.getWriter().append(result.toString());
 			
 		} else {

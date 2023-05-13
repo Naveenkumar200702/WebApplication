@@ -1,6 +1,48 @@
+
+body{
+	
+}
 #LoginWindow{
+	width:28%;
+	border: solid black 1px;
+	margin-left: 32%;
+    margin-top: 17%;
+    height: 30vh;
+    padding-left: 4%;
+    padding-bottom: 2%;
+}
+#LoginWindow #Heading{
+	text-align: center;
+}
+#LoginWindow #login{
+	margin-left: 40%;
+}
+#LoginWindow label{
+	font-size: large;
+	
+}
+
+#adminMenu{
 	display:none;
 }
-body{
-	background-color: blue;
+
+#adminMenu #logOut{
+	float:right;
+	margin-right: 4%;
+	margin-top:1%;
+	
 }
+
+#adminMenu td, th{
+	border:solid black 1px;
+	padding:10px;
+	cursor:pointer;
+}
+
+
+#staffRequestMenu #goBack{
+	float:right;
+	margin-right: 4%;
+	margin-top:1%;
+}
+

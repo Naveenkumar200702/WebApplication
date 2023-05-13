@@ -25,6 +25,7 @@ public class GetMyCourse extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute("name");
+		String option = (String)session.getAttribute("option");
 		GetMyCourseDetail getCourseDetail=new GetMyCourseDetail();
 		JSONObject obj=getCourseDetail.getMyCourseDetail(userName);
 		response.getWriter().append(obj.toString());

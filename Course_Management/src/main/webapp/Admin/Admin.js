@@ -1,31 +1,40 @@
 
-document.getElementById("LoginWindow").style.display="none";
-document.getElementById("adminLogin").addEventListener('click',function(){
-	document.getElementById("LoginWindow").style.display="block";
-	document.getElementById("adminLogin").style.display="none";
-});
+function findSession(){
+	var user=sessionStorage.getItem('user');
+	if(user=="admin"){
+		adminMenu();
+	}
+}
+var username = document.getElementById("loginusername");
 
-/*function checkUsername() {
+username.addEventListener('blur', function() {
 	let userName = document.getElementById("loginusername").value;
 	if (userName.length > 0) {
 		document.getElementById("erUsername").style.display = "none";
+	} else {
+		document.getElementById("erUsername").style.display = "block";
+		document.getElementById("erUsername").innerHTML = "Please Enter Username";
 	}
-}
-function checkPassword() {
+});
+
+document.getElementById("loginpassword").addEventListener('blur', function() {
 	let password = document.getElementById("loginpassword").value;
 	if (password.length > 0) {
 		document.getElementById("erPassword").style.display = "none";
+	} else {
+		document.getElementById("erPassword").style.display = "block";
+		document.getElementById("erPassword").innerHTML = "Please Enter Password";
 	}
-}
-*/
+});
+
+
 function login() {
 	let password = document.getElementById("loginpassword").value;
-
 	let userName = document.getElementById("loginusername").value;
 	userName = userName.trim();
 	console.log(userName + "  " + password);
 	var flag = 0;
-	if (userName.length ==0) {
+	if (userName.length == 0) {
 		document.getElementById("erUsername").style.display = "block";
 		document.getElementById("erUsername").innerHTML = "Please Enter Username";
 		flag = 1;
@@ -45,6 +54,8 @@ function login() {
 		console.log(result.length);
 		if (result == "1") {// Admin Login
 			alert("login Succesfully");
+			adminMenu();
+			sessionStorage.setItem("user","admin");	
 		}
 		else {// invalid credentials
 			alert("Invalid UserDetails");
@@ -75,3 +86,31 @@ function ajaxCall(url, requestMethod) {
 	});
 	return promise;
 }
+
+
+
+function adminMenu(){
+	document.getElementById("staffRequestMenu").style.display="none";
+	document.getElementById("LoginWindow").style.display="none";
+	document.getElementById("adminMenu").style.display="block";
+	
+}
+
+
+//-------------------------- STAFF REQUEST -------------------------
+document.getElementById("staffRequest").addEventListener("click",function(){
+	document.getElementById("adminMenu").style.display="none";
+	document.getElementById("staffRequestMenu").style.display="block";
+	let http=new hXMLHttpRequest();
+	http.onreadystatechange = function() {
+		if (http.readyState == 4) {
+			
+		}
+	}
+	http.open("GET", "http://localhost:8080/Course_Management/");
+	http.send();
+});
+
+document.getElementById("goBack").addEventListener('click',function(){
+	adminMenu();
+});

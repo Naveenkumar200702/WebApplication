@@ -1,8 +1,5 @@
 package filters;
 
-import javax.servlet.http.HttpSession;
-
-
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -13,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 
 @WebFilter(urlPatterns={"/IsRegister","/RegisterCourse","/ReadingMaterial","/GetVedioLink","/GetQuiz"})
@@ -40,6 +39,9 @@ public class CheckLoginFilter implements Filter{
 		public void init(FilterConfig fConfig) throws ServletException {
 			
 		}
+
+
+		
 	
 
 }

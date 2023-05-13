@@ -25,13 +25,14 @@ public class Connect {
 		
 		try {
 			con = DriverManager.getConnection(url, username, password);
+			System.out.println("working");
 			if(con!=null)
 				System.out.println("works");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-//	public static void main(String[] args) {
-//		Connect.getInstance();
-//	}
+	public static void main(String[] args) {
+		Connect.getInstance();
+	}
 }

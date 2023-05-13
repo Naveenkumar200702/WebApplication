@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 
 import model.LoginCheck;
 
@@ -35,19 +35,18 @@ public class Login extends HttpServlet {
 		LoginCheck obj = new LoginCheck();
 		int value = obj.loginCheck(details);
 		HttpSession session = request.getSession();
-		if (session.getAttribute("name") != null && session.getAttribute("name").equals(username)) {
-			System.out.println("already registred");
-			response.getWriter().append("" + 4);
-		} else {
+
 			String s = "";
-			if (value > 0&&value<4) {
+			if (value > 1&&value<4) {
 				session.setAttribute("name", username);
 				session.setAttribute("option", choice);
+				String officialName=obj.getpName();
+				session.setAttribute("ofName", officialName);
 			}
 			s = (String) session.getAttribute("name");
 			System.out.println(s + " session started");
 			response.getWriter().append(Integer.toString(value));
-		}
+		
 
 	}
 }

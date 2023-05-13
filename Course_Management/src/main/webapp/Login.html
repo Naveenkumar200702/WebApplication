@@ -31,10 +31,12 @@
       			<i class="fa fa-caret-down"></i>
     			</button> 
     			<div class="dropdown-content">
-      			<a id="myProfile">MyProfile</a>
-      			<a id="myCourse" onclick="getMyCourse()">MyCourse</a>
+      				<a id="myProfile">MyProfile</a>
+      				<a id="myCourse" onclick="getMyCourse()">MyCourse</a>
     			</div>
   				</div> 
+  				
+  				<a id="staffProfile">MyProfile</a>
   				 
   				 
 				<a id="LogOut" onclick="deleteSession()">Log Out</a>
@@ -113,7 +115,54 @@
 	<!--  ------------------------------------------------------------------------------------------------- -->
 	<!-- -----------------------------------------HOME ---------------------------------------------------  -->
 	<div id="home">
-		<div id="imagehover"></div>
+		<div class="slideshow-container">
+
+			<div class="mySlides">
+			<div class="slideContent">
+			The best plan for the future is to
+			prepare yourself today
+			</div>
+			<div class="slideImage">
+  			<img src="./Images/hoverFirst.png" >
+  			</div>
+			</div>
+
+			<div class="mySlides">
+			<div class="slideContent">
+			We are the stairs to your Desired Profession
+			</div>
+			<div class="slideImage">
+  			<img src="./Images/hoverSecond.png">
+  			</div>
+			</div>
+			
+			<div class="mySlides">
+			<div class="slideContent">
+			Opportunity to your future
+			</div>
+			<div class="slideImage">
+  				<img src="./Images/coach.png" >
+  			</div>
+			</div>
+
+			<a class="prev" onclick="plusSlides(-1)"></a>
+			<a class="next" onclick="plusSlides(1)"></a>
+
+		</div>
+			<br>
+			<br><br>
+			<br>
+			
+			<div id="dots" >
+			  <span class="dot" onclick="currentSlide(1)"></span> 
+			  <span class="dot" onclick="currentSlide(2)"></span> 
+			  <span class="dot" onclick="currentSlide(3)"></span> 
+			</div>
+		
+		
+		
+		
+		
 		<div id="content1">
 			<div id="content1Left"></div>
 			<div id="content1Right">
@@ -217,13 +266,35 @@
 	
 <!--  ====================== POST ASSIGNMENT	 ================================= -->
 <div id="PostAssignment"></div>
+<div id="AssignmentDiv">
+<div id="getNumberOfQuestion">
+<label> Enter Topic of Assignment </label><input type="text" id="assignmentTopic"><span></span><br><br>
+<input type="button" value="continue" onclick="getTotalQuestion()">
+</div>
+
+<div id="getQuestion">
+<label>Question</label><input type="text" id="Question"><br><br>
+<label>Option- 1</label><input type="text" id="option1"><br><br>
+<label>Option - 2</label><input type="text" id="option2"><br><br>
+<label>Option - 3</label><input type="text" id="option3"><br><br>
+<label>Option - 4</label><input type="text" id="option4"><br><br>
+<label>answer</label><input type="text" id="answer"><br>
+<input type="button" value="Next" onclick="storeCurrentQuestion()"><input type="button" id="submitAssignment" value="submit">
+
+
+</div>
+
+
+</div>
 
 <!-- --------------------------------- SHOW COURSES ------------------------------------------------- -->
 <div id="containers"></div>
 
 <div id="view-course">
-	<a id="backButton" onclick="goBack()">close</a>
+	<a id="backButton" onclick="goBack()"><img src="./Images/close1.png"></a>
+	
 	<div id="showCourse-details">
+	
 	</div>
 <!--  ================================ QUIZ QUESTIONS ======================================= -->
 	<div id="quizQuestion">
@@ -236,12 +307,42 @@
 </div>
 <!-- ============================================================================================== -->
 <!-- ------------------------------------MYPROFILE---------------------------------------------------- -->
+
 <div id="showMyProfile">
+	<aside class="profile-card">
+        <header>
+
+          <a target="_blank" href="#">
+            <img src="http://lorempixel.com/150/150/people/" class="hoverZoomLink">
+          </a>
+          <h1 id="myName"></h1>
+          <h2 id="myMailId"> </h2>
+        </header>
+      <br>
+      <br>
+       
+        <div class="profile-bio">
+      		<h2 id="myDob"></h2>
+      		<h2 id="myNo"></h2>
+      		<h2 id="myQualification"></h2>
+      		<h2 id="myExperience"></h2>
+        </div>    
+      </aside>
+
+
 </div>
+
+
 <!-- =========================================================================================== -->
+<!--  =================================Certificate============================================= -->
+
+
+
+<!--  ===========================================================================================  -->
 </body>
 <script src="Home/Login.js"></script>
 <script src="https://jsuites.net/v4/jsuites.js">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

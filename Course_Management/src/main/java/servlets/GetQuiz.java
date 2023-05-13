@@ -32,7 +32,8 @@ public class GetQuiz extends HttpServlet {
 		String courseid=request.getParameter("courseid");
 		HttpSession session = request.getSession();
 		String userName=(String)session.getAttribute("name");
-		if(isRegister.isRegistered(Integer.parseInt(courseid),userName)==1)
+		int val=isRegister.isRegistered(Integer.parseInt(courseid),userName);
+		if(val>=30)
 		{
 			JSONObject result=quiz.getQuizQuestion(Integer.parseInt(courseid));
 			response.getWriter().append(result.toString());		

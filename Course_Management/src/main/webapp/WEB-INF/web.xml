@@ -3,6 +3,6 @@
   <display-name>Course_Management</display-name>
   <welcome-file-list>
     <welcome-file>Login.html</welcome-file>
-    
   </welcome-file-list>
+  
 </web-app>

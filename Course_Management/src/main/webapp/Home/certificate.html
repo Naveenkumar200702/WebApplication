@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body id="certificate_Body" onload="getCertificate()">
+	
+        <a>
+        <div class="outer-border" id="certificate">
+            <div class="inner-dotted-border" >
+				
+                   <br><br>
+                   <span class="certification">Certificate of Completion</span>
+                   <br><br>
+                   <span class="certify"><i>This is to certify that</i></span>
+                   <br><br>
+                   <span id="cer-name" class="name"></span><br/><br/>
+                   <span class="certify" ><i>has successfully completed the certification</i></span> <br/><br/>
+                   <span id="cer-course" class="fs-30"></span> <br/><br/>
+                   <span class="fs-20">with score of <b id="totalPercent"></b></span> <br/><br/><br>
+                   <span class="certify"><i>dated</i></span><br>
+                  <span id="cer-date" class="fs-30"></span>
+            
+            </div>
+            </div>
+        </a>
+        <button id="download-certificate" class="glow-on-hover" type="button" onclick="downloadCertificate()"> DOWNLOAD </button>
+</body>
+<style>
+body{
+	margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #fffdd0;
+	
+}
+#download-certificate{
+float:right;
+}
+.outer-border{
+    width:650px; 
+    height:550px; 
+    padding:20px; 
+    text-align:center; 
+    border: 10px solid #673AB7 ; 
+    margin-left:5%;
+    margin-top:5%;
+    background-color: #c0fcfb;
+}
+
+.inner-dotted-border{
+    width:600px; 
+    height:500px; 
+    padding:20px; 
+    text-align:center; 
+    border: 5px solid #673AB7;
+    border-style: dotted;
+}
+
+.certification{
+    font-size:50px; font-weight:bold;    color: #663ab7;
+}
+
+.certify{
+    font-size:25px;
+}
+
+.name{
+    font-size:30px;    color: green;
+}
+
+.fs-30{
+    font-size:30px;
+}
+
+.fs-20{
+    font-size:20px;
+}
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: black;
+    background: #16FF00;
+    cursor: pointer;
+    position: relative;
+    margin-left:10%;
+    
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #16FF00;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+</style>
+
+ 
+<script src="Login.js"></script>
+</html>

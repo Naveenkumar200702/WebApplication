@@ -1,8 +1,10 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.TimeUnit;
 
 import dbcon.Connect;
 
@@ -17,7 +19,15 @@ public class IsCourseRegistered {
 			statement.setString(2, studentId);
 			ResultSet resultSet=statement.executeQuery();
 			if(resultSet.next())
-				return 1;	
+			{
+				Date registerDate=resultSet.getDate("dateofregister");
+				long millis=System.currentTimeMillis();     
+			    long time_difference = millis - registerDate.getTime();  
+	            int days_difference = (int)TimeUnit.MILLISECONDS.toDays(time_difference) % 365;  
+				return days_difference;
+				
+			}
+				
 		}catch(Exception e)
 		{
 			e.printStackTrace();
